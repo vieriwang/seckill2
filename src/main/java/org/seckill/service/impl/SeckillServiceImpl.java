@@ -1,14 +1,14 @@
 package org.seckill.service.impl;
 
 import org.apache.commons.collections.MapUtils;
-import org.seckill.exception.RepeatkillException;
-import org.seckill.exception.SeckillException;
-import org.seckill.exception.SeckillCloseException;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.entity.Seckill;
+import org.seckill.exception.RepeatkillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
 import org.seckill.util.MD5Util;
 import org.seckill.util.dto.Result;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,24 +46,12 @@ public class SeckillServiceImpl implements SeckillService {
         return seckillDao.queryById(seckillId);
     }
 
-    public static void main(String[] args) {
-        //System.out.println(new Date());
-        Date d = new Date(1552324133000l);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        System.out.println(sdf.format(d));
-        Date now =new Date(1552297167435l);
-        System.out.println(sdf.format(now));
-    }
-
     /**
      * 秒杀开启时输出秒杀接口地址
      * 否则输出系统时间和秒杀时间
      *
      * @param seckillId
      */
-
-
-
     public Exposer exportSeckillUrl(long seckillId) {
         //优化点：缓存优化;超时的基础上维护一致性。
         Date now = new Date();
