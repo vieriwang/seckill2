@@ -1,0 +1,3 @@
+# seckill2
+
+seckill2是基于seckill生成出来的秒杀系统进行优化，在mysql使用了存储过程来控制事务，使用了redis缓存来保存秒杀生成的UR
