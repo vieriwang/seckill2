@@ -37,3 +37,45 @@ create_time timestamp  not null DEFAULT CURRENT_TIMESTAMP comment '创建时间'
 primary key(seckill_id,user_phone), /*联合主键*/
 key idx_create_time(create_time)
 )ENGINE=innoDB default charset=utf8 comment='秒杀成功明细表'
+
+-- 存储过程，插入success_killed表下单明细记录,同时减库存。
+BEGIN DECLARE  insert_count int DEFAULT  0;
+START TRANSACTION;
+insert ignore into success_killed
+  (seckill_id, user_phone, create_time)
+values (v_seckill_id, v_phone, v_kill_time);
+select row_count() into insert_count;
+IF
+  (insert_count = 0)
+  THEN
+ROLLBACK;
+set r_result = -1;
+ELSEIF
+  (insert_count < 0)
+  THEN
+ROLLBACK;
+set r_result = -2;
+ELSE
+update seckill
+set number = number - 1
+where number > 0
+  and seckill_id = v_seckill_id
+  and v_kill_time > start_time
+  and v_kill_time < end_time;
+select row_count() into insert_count;
+IF
+  (insert_count = 0)
+  THEN
+ROLLBACK;
+set r_result = 0;
+ELSEIF
+  (insert_count<0)
+  THEN
+ROLLBACK;
+set r_result = -2;
+ELSE
+commit;
+set r_result = 1;
+END IF;
+END IF;
+END

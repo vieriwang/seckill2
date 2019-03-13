@@ -42,4 +42,14 @@ public interface SeckillService {
      */
     Result executeSeckill(long seckillId, long phone, String md5);
 
+    /**
+     * 使用存储过程来运行秒杀
+     *
+     * @param seckillId
+     * @param phone
+     * @param md5
+     * @return
+     */
+    Result executeSeckillProducedure(long seckillId, long phone, String md5);
+
 }

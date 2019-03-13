@@ -50,7 +50,7 @@ public class SeckillController {
     @PostMapping("/{seckillId}/{md5}/execution")
     @ResponseBody
     public Result execution(@PathVariable long seckillId,@PathVariable String md5,@CookieValue("killPhone") long killPhone){
-        Result r = seckillService.executeSeckill(seckillId,killPhone,md5);
+        Result r = seckillService.executeSeckillProducedure(seckillId, killPhone, md5);
         return r;
     }
 }
