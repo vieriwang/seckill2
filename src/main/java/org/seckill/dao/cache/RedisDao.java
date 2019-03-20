@@ -38,7 +38,6 @@ public class RedisDao {
                     //seckill 被反序列化
                     return seckill;
                 }
-
             } finally {
                 jedis.close();
             }
@@ -56,7 +55,6 @@ public class RedisDao {
                 String key = "seckill:" + seckill.getSeckillId();
                 byte[] bytes = ProtostuffIOUtil.toByteArray(seckill, schema,
                         LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE));
-
                 //超时缓存
                 int timeout = 60 * 60;//1小时
                 String result = jedis.setex(key.getBytes(), timeout, bytes);
