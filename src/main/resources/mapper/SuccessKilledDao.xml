@@ -9,20 +9,20 @@
     </insert>
     <select id="queryByIdWithSeckill" resultType="SuccessKilled">
         <!-- 根据id查询successKilled并携带秒杀产品对象实体 -->
-        select sk.seckill_id,
+        SELECT sk.seckill_id,
         sk.user_phone,
         sk.state,
         sk.create_time,
         s.seckill_id "seckill.seckill_id",
-        s.name "seckill.name",
+        s. NAME "seckill.name",
         s.number "seckill.number",
         s.start_time "seckill.start_time",
         s.end_time "seckill.end_time",
         s.create_time "seckill.create_time"
-        from success_killed sk
-        left join seckill s
-        on sk.seckill_id = s.seckill_id
-        where sk.seckill_id = #{seckillId}
-        and sk.user_phone = #{userPhone}
+        FROM success_killed sk
+        LEFT JOIN seckill s
+        ON sk.seckill_id = s.seckill_id
+        WHERE sk.seckill_id = #{seckillId}
+        AND sk.user_phone = #{userPhone}
     </select>
 </mapper>
