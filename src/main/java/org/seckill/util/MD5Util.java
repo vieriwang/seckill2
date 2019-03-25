@@ -11,4 +11,4 @@ public class MD5Util {
         return DigestUtils.md5DigestAsHex(base.getBytes());
     }
 
-}.
+}
